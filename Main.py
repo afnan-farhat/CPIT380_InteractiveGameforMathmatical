@@ -15,7 +15,7 @@ img = cv2.imread(image_path)
 img_array = cv2.cvtColor(np.array(img), cv2.COLOR_RGB2BGR)
 
 # Save the image using OpenCV
-cv2.imwrite("removed_noise.jpg", img_array)
+cv2.imwrite("images/removed_noise.jpg", img_array)
 
 # Convert the image to text using PyTesseract
 text = pytesseract.image_to_string(img_array)

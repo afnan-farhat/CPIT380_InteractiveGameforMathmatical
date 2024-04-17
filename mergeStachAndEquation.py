@@ -74,14 +74,14 @@ class CharStack:
 pytesseract.pytesseract.tesseract_cmd = r"C:\Users\Afnan\Desktop\Student Life\KAU\3th\semester2\Multimedia CPIT380\project\app\tesseract.exe"
 
 # Open the image file
-image_path = r"C:\Users\Afnan\PycharmProjects\cpit380\EQUATION2.png"
+image_path = r"C:\Users\Afnan\PycharmProjects\cpit380\images\EQUATION2.png"
 img = cv2.imread(image_path)
 
 # Convert the image to a NumPy array and change color space
 img_array = cv2.cvtColor(np.array(img), cv2.COLOR_RGB2BGR)
 
 # Save the image using OpenCV
-cv2.imwrite("removed_noise.jpg", img_array)
+cv2.imwrite("images/removed_noise.jpg", img_array)
 
 # Convert the image to text using PyTesseract
 text = pytesseract.image_to_string(img_array)
