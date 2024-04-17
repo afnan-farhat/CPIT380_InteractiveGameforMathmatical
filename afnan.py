@@ -79,29 +79,20 @@ class Stack:
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Aux operations
 def isOperand(c):
-    return c not in operators
-
+    return c.isdigit()
 
 operators = "+-*/"
-
 
 def isOperator(c):
     return c in operators
 
-
 def getPrecedence(c):
-    result = 0
-
-    for char in operators:
-        result += 1
-
-        if char == c:
-            if c in '-/':
-                result -= 1
-            break
-
-    return result
-
+    if c in '-/':
+        return 1
+    elif c in '+*':
+        return 2
+    else:
+        return 0
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # infix to postfix
@@ -141,7 +132,7 @@ def toPostfix(expression):
 def evaluatePostfix(infixExps, expression, queueOfOperators):
     stack = Stack(15)
     StackFullEquation = Stack(30)
-    score = 0
+
     for char in expression:
         if isOperand(char):
             stack.push(int(char))
@@ -152,72 +143,29 @@ def evaluatePostfix(infixExps, expression, queueOfOperators):
             operand2 = stack.pop()
             operand1 = stack.pop()
 
-            # # ERROR HERE
-            # operand4 = StackFullEquation.pop()
-            # if StackFullEquation.peek() in "+-/*":
-            #     index = StackFullEquation.get_index(StackFullEquation.peek())
-            #     operand3= StackFullEquation.pop_at_index(index)
-            # else:
-            #     operand3= StackFullEquation.pop()
-
-            # here
-
             result = 0
-            result2 = 0
             if char == '+':
                 result = operand1 + operand2
-                #result2 = operand3 + operand4
             elif char == '-':
                 result = operand1 - operand2
-                # result2 = operand3 - operand4
             elif char == '*':
                 result = operand1 * operand2
-                # result2 = operand3 * operand4
             elif char == '/':
                 result = operand1 / operand2
-                # result2 = operand3 / operand4
 
             stack.push(result)
             StackFullEquation.push(str(symbol))
 
-            # StackFullEquation.push(result2)
+            # Display the part of the equation based on the selected first operator
+            part_of_equation = f"{operand1} {symbol} {operand2}"
+            print(f"Part of the equation: {part_of_equation}")
 
-            # Comparing:  multiple choice
-            choice = input("enter the symbol: ")
-            #
-            # answer= choice == symbol
-            # print(answer)
-
-            while queueOfOperators[0] != choice:
-                score -= 10
-                print("Your score decrease 10 score\nNew Score is: ", score)
-                choice = input("Wrong answer. Please try again")
-
-            if queueOfOperators[0] == choice:
-                score += 10
-                print("Your score is: ", score)
-                queueOfOperators.pop(0)
-                #StackFullEquation.display()
-                #print(infixExps)
-
-                # Display the part of the equation based on the selected first operator
-                part_of_equation = f"{operand1} {symbol} {operand2}"
-
-                # Replace all occurrences of 'a' with 'e' in the string
-                # Find the index of part_of_equation in infixExps
-                try:
-                    infixExps = list(map(lambda x: x.replace(part_of_equation, str(result)), infixExps))
-
-                    print(str(infixExps))
-
-                except ValueError:
-                    # Handle the case where part_of_equation is not found in infixExps
-                    print(f"{part_of_equation} not found in infixExps")
-
-
-                #print(f"Part of the equation: {part_of_equation}")
+            # Update the expression for the next iteration
+            StackFullEquation.display()
+            print()
 
     return stack.pop()
+
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # test
@@ -227,16 +175,12 @@ for exp in infixExps:
     postfix = toPostfix(exp)
     print(f'Infix: {exp} -> Postfix: {postfix}')
 
-
-    queueOperator = []  # Create an empty list
+    queueOperator = []
 
     for char in postfix:
         if isOperator(char):
             queueOperator.append(char)
     print(queueOperator)
 
-
-
-    result = evaluatePostfix(infixExps,postfix, queueOperator)
+    result = evaluatePostfix(infixExps, postfix, queueOperator)
     print(f'\nResult: {result}')
-    exit()
