@@ -8,7 +8,7 @@ import re
 pytesseract.pytesseract.tesseract_cmd = r"C:\Users\Afnan\Desktop\Student Life\KAU\3th\semester2\Multimedia CPIT380\project\app\tesseract.exe"
 
 # Open the image file
-image_path = r"C:\Users\Afnan\PycharmProjects\cpit380\newfont.png"
+image_path = r"C:\Users\Afnan\PycharmProjects\cpit380\EQUATION2.png"
 img = cv2.imread(image_path)
 
 # Convert the image to a NumPy array and change color space
