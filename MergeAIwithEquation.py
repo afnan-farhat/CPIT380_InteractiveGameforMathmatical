@@ -190,10 +190,10 @@ import numpy as np
 import re
 
 # Path to the Tesseract executable
-pytesseract.pytesseract.tesseract_cmd = r"C:\Users\Afnan\Desktop\Student Life\KAU\3th\semester2\Multimedia CPIT380\project\app\tesseract.exe"
+pytesseract.pytesseract.tesseract_cmd = r"C:\Users\Afnan\Desktop\Student Life\KAU\3th\semester2\Multimedia_CPIT380\project\app\tesseract.exe"
 
 # Open the image file
-image_path = r"C:\Users\Afnan\PycharmProjects\cpit380\EQUATION2.png"
+image_path = r"C:\Users\Afnan\PycharmProjects\CPIT380project\images\EQUATION2.png"
 img = cv2.imread(image_path)
 
 # Convert the image to a NumPy array and change color space
@@ -243,7 +243,7 @@ for char in text:
 spaced_text_str = "".join(spaced_text)
 
 text_without_final_space = spaced_text_str[:-1]
-print(text_without_final_space)  # Output: "2 * 3 + 5 - 2 * 10 / 4 "
+print("text_without_final_space",text_without_final_space)  # Output: "2 * 3 + 5 - 2 * 10 / 4 "
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # test
@@ -258,7 +258,7 @@ for exp in infixExps:
     for char in postfix:
         if isOperator(char):
             queueOperator.append(char)
-    print(queueOperator)
+    print("operand : ",queueOperator)
 
     result = evaluatePostfix(infixExps,postfix, queueOperator)
     print(f'\nResult: {result}')
